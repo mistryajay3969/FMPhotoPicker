@@ -84,8 +84,8 @@ public struct FMPhotoPickerConfig {
         "editor_crop_ratioOrigin":                  "Origin",
         "editor_crop_ratioSquare":                  "Square",
 
-        "permission_dialog_title":                  "FMPhotoPicker",
-        "permission_dialog_message":                "FMPhotoPicker wants to access Photo Library",
+        "permission_dialog_title":                  "FM Photo Picker",
+        "permission_dialog_message":                "FM Photo Picker wants to access Photo Library",
         "permission_button_ok":                     "OK",
         "permission_button_cancel":                 "Cancel"
     ]
