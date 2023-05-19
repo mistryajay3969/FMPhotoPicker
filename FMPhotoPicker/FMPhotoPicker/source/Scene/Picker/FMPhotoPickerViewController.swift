@@ -289,33 +289,33 @@ extension FMPhotoPickerViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension FMPhotoPickerViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = FMPhotoPresenterViewController(config: self.config, dataSource: self.dataSource, initialPhotoIndex: indexPath.item)
-        
-        self.presentedPhotoIndex = indexPath.item
-        
-        vc.didSelectPhotoHandler = { photoIndex in
-            self.tryToAddPhotoToSelectedList(photoIndex: photoIndex)
-        }
-        vc.didDeselectPhotoHandler = { photoIndex in
-            if let selectedIndex = self.dataSource.selectedIndexOfPhoto(atIndex: photoIndex) {
-                self.dataSource.unsetSeclectedForPhoto(atIndex: photoIndex)
-                self.reloadAffectedCellByChangingSelection(changedIndex: selectedIndex)
-                self.imageCollectionView.reloadItems(at: [IndexPath(row: photoIndex, section: 0)])
-                self.updateControlBar()
-            }
-        }
-        vc.didMoveToViewControllerHandler = { vc, photoIndex in
-            self.presentedPhotoIndex = photoIndex
-        }
-        vc.didTapDone = {
-            self.processDetermination()
-        }
-        
-        vc.view.frame = self.view.frame
-        vc.transitioningDelegate = self
-        vc.modalPresentationStyle = .custom
-        vc.modalPresentationCapturesStatusBarAppearance = true
-        self.present(vc, animated: true)
+//        let vc = FMPhotoPresenterViewController(config: self.config, dataSource: self.dataSource, initialPhotoIndex: indexPath.item)
+//
+//        self.presentedPhotoIndex = indexPath.item
+//
+//        vc.didSelectPhotoHandler = { photoIndex in
+//            self.tryToAddPhotoToSelectedList(photoIndex: photoIndex)
+//        }
+//        vc.didDeselectPhotoHandler = { photoIndex in
+//            if let selectedIndex = self.dataSource.selectedIndexOfPhoto(atIndex: photoIndex) {
+//                self.dataSource.unsetSeclectedForPhoto(atIndex: photoIndex)
+//                self.reloadAffectedCellByChangingSelection(changedIndex: selectedIndex)
+//                self.imageCollectionView.reloadItems(at: [IndexPath(row: photoIndex, section: 0)])
+//                self.updateControlBar()
+//            }
+//        }
+//        vc.didMoveToViewControllerHandler = { vc, photoIndex in
+//            self.presentedPhotoIndex = photoIndex
+//        }
+//        vc.didTapDone = {
+//            self.processDetermination()
+//        }
+//
+//        vc.view.frame = self.view.frame
+//        vc.transitioningDelegate = self
+//        vc.modalPresentationStyle = .custom
+//        vc.modalPresentationCapturesStatusBarAppearance = true
+//        self.present(vc, animated: true)
     }
 }
 

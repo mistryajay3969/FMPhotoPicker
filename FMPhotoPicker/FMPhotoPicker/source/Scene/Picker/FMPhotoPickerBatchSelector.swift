@@ -62,6 +62,40 @@ class FMPhotoPickerBatchSelector: NSObject {
         self.viewController.view.addGestureRecognizer(self.panGesture)
     }
     
+    var timer: Timer?
+    var prevPointY: Double = 0
+    var offsetYValue: Double = 0
+    
+    func startTimer()  {
+        stopTimer()
+        timer = Timer.scheduledTimer(timeInterval: 0.13, target: self, selector: #selector(autoScrollCollectionView), userInfo: nil, repeats: true)
+    }
+    
+    func stopTimer()  {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    @objc func autoScrollCollectionView() {
+        
+        let contentHeight = self.collectionView.contentSize.height - (self.collectionView.frame.size.height - 50)
+        
+        var offset = self.collectionView.contentOffset
+        
+        offset.y += offsetYValue
+        if offset.y < contentHeight && offset.y > 0 {
+            self.collectionView.setContentOffset(offset, animated: false)
+            self.processPanEvent(pan: panGesture)
+        }
+        else {
+            stopTimer()
+        }
+        
+        print("offset.y \(offset.y)")
+        print("contentHeight \(contentHeight)")
+        
+    }
+    
     
     @objc private func panGestureHandler(sender: UIPanGestureRecognizer) {
         if sender.state == .began {
@@ -83,10 +117,13 @@ class FMPhotoPickerBatchSelector: NSObject {
                 self.collectionView.reloadItems(at: [cellIndexPathOfBeganTap])
             }
         } else if sender.state == .ended {
+            stopTimer()
+            print("ended")
             self.indexPathOfBeganTap = nil
             self.prevIndexPath = nil
             self.panSelections.removeAll()
         } else {
+            print("else")
             self.processPanEvent(pan: sender)
         }
     }
@@ -140,6 +177,20 @@ class FMPhotoPickerBatchSelector: NSObject {
         self.viewController.reloadAffectedCellByChangingSelection(changedIndex: 0)
         
         self.viewController.updateControlBar()
+        
+        let pointY = pan.location(in: self.collectionView).y
+        let height = self.collectionView.frame.size.height - 300
+
+        offsetYValue = pointY > prevPointY ? 50 : -50
+
+        print("pointY \(pointY)")
+        print("height \(height)")
+
+        if pointY >= height && timer == nil {
+            startTimer()
+        }
+
+        prevPointY = pointY
         
         self.prevIndexPath = currentIndexPath
     }

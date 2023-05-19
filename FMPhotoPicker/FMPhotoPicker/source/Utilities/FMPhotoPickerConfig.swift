@@ -45,7 +45,7 @@ public enum FMMediaType {
 public struct FMPhotoPickerConfig {
     public var mediaTypes: [FMMediaType] = [.image]
     public var selectMode: FMSelectMode = .multiple
-    public var maxImage: Int = 10
+    public var maxImage: Int = 100
     public var maxVideo: Int = 10
     public var availableFilters: [FMFilterable]? = kDefaultAvailableFilters
     public var availableCrops: [FMCroppable]? = kDefaultAvailableCrops
@@ -84,8 +84,8 @@ public struct FMPhotoPickerConfig {
         "editor_crop_ratioOrigin":                  "Origin",
         "editor_crop_ratioSquare":                  "Square",
 
-        "permission_dialog_title":                  "FM Photo Picker",
-        "permission_dialog_message":                "FM Photo Picker wants to access Photo Library",
+        "permission_dialog_title":                  "Custom FMPhotoPicker",
+        "permission_dialog_message":                "Custom FMPhotoPicker wants to access Photo Library",
         "permission_button_ok":                     "OK",
         "permission_button_cancel":                 "Cancel"
     ]
